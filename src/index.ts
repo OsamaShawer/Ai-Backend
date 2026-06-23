@@ -2,11 +2,16 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import communityRouter from "./communityRoutes";
+const PORT = process.env.PORT || 3000
 
 const app = express();
 app.use(express.json());
-
-mongoose.connect("mongodb://localhost:27017/Community")
+app.use(cors({
+    origin: "https://questions-and-ai.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+}));
+mongoose.connect("mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/community?retryWrites=true&w=majority")
     .then(() => {
         console.log("Connected to MongoDB");
     })
@@ -14,11 +19,7 @@ mongoose.connect("mongodb://localhost:27017/Community")
         console.log("MongoDB connection error", err);
     });
 
-app.use(cors({
-    origin: "https://questions-and-ai.vercel.app",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-}));
+
 
 
 app.get("/", (req, res) => {
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/community", communityRouter);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log("Server is running on port 3000");
 });
+"zc8XZauuhaQ94It1"
