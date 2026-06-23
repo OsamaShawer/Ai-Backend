@@ -17,9 +17,9 @@ mongoose_1.default.connect("mongodb://localhost:27017/Community")
     console.log("MongoDB connection error", err);
 });
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: "https://questions-and-ai.vercel.app",
     credentials: true,
-    methods: ["*", "GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 app.get("/", (req, res) => {
     res.send("Hello World");

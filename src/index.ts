@@ -15,9 +15,9 @@ mongoose.connect("mongodb://localhost:27017/Community")
     });
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://questions-and-ai.vercel.app",
     credentials: true,
-    methods: ["*", "GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
 
