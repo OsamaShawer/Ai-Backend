@@ -12,7 +12,7 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 //                mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/?appName=Cluster0/community?retryWrites=true&w=majority
-mongoose.connect("mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/?appName=Cluster0/community?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/community?retryWrites=true&w=majority&appName=Cluster0")
     .then(() => {
         console.log("Connected to MongoDB");
     })
