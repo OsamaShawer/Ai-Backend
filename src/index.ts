@@ -11,7 +11,8 @@ app.use(cors({
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
 }));
-mongoose.connect("mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/community?retryWrites=true&w=majority")
+//                mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/?appName=Cluster0/community?retryWrites=true&w=majority
+mongoose.connect("mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/?appName=Cluster0/community?retryWrites=true&w=majority")
     .then(() => {
         console.log("Connected to MongoDB");
     })
@@ -31,4 +32,3 @@ app.use("/api/community", communityRouter);
 app.listen(PORT, () => {
     console.log("Server is running on port 3000");
 });
-"zc8XZauuhaQ94It1"
