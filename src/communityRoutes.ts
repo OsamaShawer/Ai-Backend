@@ -8,32 +8,35 @@ interface OpinionRequestBody {
 
 const communityRouter = Router();
 
-communityRouter.post("/opinion", async (req: Request<{}, {}, OpinionRequestBody>, res: Response) => {
-  try {
-    const username = req.body.username?.trim();
-    const opinion = req.body.opinion?.trim();
+communityRouter.post(
+  "/opinion",
+  async (req: Request<{}, {}, OpinionRequestBody>, res: Response) => {
+    try {
+      const username = req.body.username?.trim();
+      const opinion = req.body.opinion?.trim();
 
-    if (!username || !opinion) {
-      return res.status(400).json({
+      if (!username || !opinion) {
+        return res.status(400).json({
+          success: false,
+          message: "Validation error",
+        });
+      }
+
+      await CommunityModel.create({ username, opinion });
+
+      return res.status(201).json({
+        success: true,
+        message: "Opinion submitted successfully",
+      });
+    } catch (error) {
+      console.error("Failed to submit community opinion", error);
+      return res.status(500).json({
         success: false,
-        message: "Validation error",
+        message: "Internal server error",
       });
     }
-
-    await CommunityModel.create({ username, opinion });
-
-    return res.status(201).json({
-      success: true,
-      message: "Opinion submitted successfully",
-    });
-  } catch (error) {
-    console.error("Failed to submit community opinion", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
-  }
-});
+  },
+);
 
 communityRouter.get("/opinions", async (_req: Request, res: Response) => {
   try {

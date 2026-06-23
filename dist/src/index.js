@@ -16,7 +16,8 @@ const allowedOrigins = [
     process.env.FRONTEND_URL,
 ].filter(Boolean);
 app.use(express_1.default.json());
-mongoose_1.default.connect(mongoUri)
+mongoose_1.default
+    .connect(mongoUri)
     .then(() => {
     console.log("Connected to MongoDB");
 })
