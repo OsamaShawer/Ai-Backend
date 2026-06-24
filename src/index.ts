@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import communityRouter from "./communityRoutes";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const mongoUri = process.env.MONGO_URI || "mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/community?retryWrites=true&w=majority&appName=Cluster0";
 const allowedOrigins = [
   "http://localhost:5173",
