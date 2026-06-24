@@ -8,15 +8,14 @@ const community_1 = __importDefault(require("../Shema/community"));
 const communityRouter = (0, express_1.Router)();
 communityRouter.post("/opinion", async (req, res) => {
     try {
-        const username = req.body.username?.trim();
         const opinion = req.body.opinion?.trim();
-        if (!username || !opinion) {
+        if (!opinion) {
             return res.status(400).json({
                 success: false,
                 message: "Validation error",
             });
         }
-        await community_1.default.create({ username, opinion });
+        await community_1.default.create({ opinion });
         return res.status(201).json({
             success: true,
             message: "Opinion submitted successfully",
@@ -35,7 +34,6 @@ communityRouter.get("/opinions", async (_req, res) => {
         const opinions = await community_1.default.find().sort({ createdAt: -1 }).lean();
         return res.json(opinions.map((opinion) => ({
             id: opinion._id,
-            username: opinion.username,
             opinion: opinion.opinion,
             createdAt: opinion.createdAt,
         })));

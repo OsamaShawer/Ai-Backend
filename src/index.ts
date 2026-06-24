@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 import communityRouter from "./communityRoutes";
 
 const app = express();
-const port = process.env.PORT || 8080;
-const mongoUri = process.env.MONGO_URI || "mongodb+srv://osamashawar7_db_user:zc8XZauuhaQ94It1@cluster0.wyrwbv5.mongodb.net/community?retryWrites=true&w=majority&appName=Cluster0";
+const port = process.env.PORT || 3000;
+const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/Community";
 const allowedOrigins = [
   "http://localhost:5173",
   "https://questions-and-ai.vercel.app",
@@ -26,13 +26,12 @@ mongoose
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow direct browser visits (no origin) or explicit matches
-      if (!origin || allowedOrigins.includes(origin) || origin === "null") {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
-      } else {
-        // Return a standard CORS failure message instead of a breaking Express Error object
-        callback(null, false);
+        return;
       }
+
+      callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

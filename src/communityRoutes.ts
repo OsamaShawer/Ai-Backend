@@ -2,7 +2,6 @@ import { Router, Request, Response } from "express";
 import CommunityModel from "../Shema/community";
 
 interface OpinionRequestBody {
-  username?: string;
   opinion?: string;
 }
 
@@ -12,17 +11,16 @@ communityRouter.post(
   "/opinion",
   async (req: Request<{}, {}, OpinionRequestBody>, res: Response) => {
     try {
-      const username = req.body.username?.trim();
       const opinion = req.body.opinion?.trim();
 
-      if (!username || !opinion) {
+      if (!opinion) {
         return res.status(400).json({
           success: false,
           message: "Validation error",
         });
       }
 
-      await CommunityModel.create({ username, opinion });
+      await CommunityModel.create({ opinion });
 
       return res.status(201).json({
         success: true,
@@ -45,7 +43,6 @@ communityRouter.get("/opinions", async (_req: Request, res: Response) => {
     return res.json(
       opinions.map((opinion) => ({
         id: opinion._id,
-        username: opinion.username,
         opinion: opinion.opinion,
         createdAt: opinion.createdAt,
       })),
