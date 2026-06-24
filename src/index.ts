@@ -26,12 +26,13 @@ mongoose
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow direct browser visits (no origin) or explicit matches
+      if (!origin || allowedOrigins.includes(origin) || origin === "null") {
         callback(null, true);
-        return;
+      } else {
+        // Return a standard CORS failure message instead of a breaking Express Error object
+        callback(null, false);
       }
-
-      callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
